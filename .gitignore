@@ -1,0 +1,33 @@
+# Dependency directories
+/node_modules
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+/dist
+/build
+/out
+
+# IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+# Test results
+/coverage
+
+# Other common ignored files
+*.log
+*.tmp
+*.swp
