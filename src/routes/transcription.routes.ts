@@ -1,23 +1,22 @@
-
-import { Router } from 'express';
-import multer from 'multer';
-import path from 'node:path';
+import { Router } from "express";
+import multer from "multer";
+import path from "node:path";
 
 import {
   transcribeController,
   correctController,
-} from '../controllers/transcription.controller';
+} from "../controllers/transcription.controller";
 
 const router = Router();
 
 const allowedExtensions = new Set([
-  '.m4a',
-  '.mp3',
-  '.wav',
-  '.webm',
-  '.ogg',
-  '.flac',
-  '.mp4',
+  ".m4a",
+  ".mp3",
+  ".wav",
+  ".webm",
+  ".ogg",
+  ".flac",
+  ".mp4",
 ]);
 
 const upload = multer({
@@ -29,14 +28,10 @@ const upload = multer({
   },
 
   fileFilter: (_req, file, callback) => {
-    const extension = path
-      .extname(file.originalname)
-      .toLowerCase();
+    const extension = path.extname(file.originalname).toLowerCase();
 
     if (!allowedExtensions.has(extension)) {
-      return callback(
-        new Error('Unsupported audio format.'),
-      );
+      return callback(new Error("Unsupported audio format."));
     }
 
     callback(null, true);
@@ -44,16 +39,9 @@ const upload = multer({
 });
 
 // Upload audio and process transcription.
-router.post(
-  '/transcribe',
-  upload.single('audio'),
-  transcribeController,
-);
+router.post("/transcribe", upload.single("audio"), transcribeController);
 
 // Retry correction without uploading audio again.
-router.post(
-  '/correct',
-  correctController,
-);
+router.post("/correct", correctController);
 
 export default router;
